@@ -16,10 +16,8 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
-export const metadataBase = new URL('https://codeclub.smvdu.ac.in')
-
 export const metadata: Metadata = {
-  metadataBase,
+  metadataBase: new URL('https://codeclub.smvdu.ac.in'),
   title: {
     default: 'Code Club SMVDU | Think. Code. Solve. Grow.',
     template: '%s | Code Club SMVDU',

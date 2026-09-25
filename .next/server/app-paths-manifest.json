@@ -1,4 +1,11 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/projects/page": "app/projects/page.js",
+  "/events/page": "app/events/page.js",
+  "/team/page": "app/team/page.js",
+  "/events/[slug]/page": "app/events/[slug]/page.js",
+  "/join/page": "app/join/page.js"
 }
