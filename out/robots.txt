@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://codeclub.smvdu.ac.in/sitemap.xml
