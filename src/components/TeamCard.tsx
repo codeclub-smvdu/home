@@ -22,12 +22,12 @@ export function TeamCard({ member }: TeamCardProps) {
     { key: 'github', url: member.github ?? '' },
     { key: 'linkedin', url: member.linkedin ?? '' },
     { key: 'instagram', url: member.instagram ?? '' },
-    { key: 'email', url: member.email ?? '' },
+    { key: 'email', url: `mailto:${member.email}` },
   ].filter((s): s is SocialLink => Boolean(s.url))
 
   return (
-    <article className="group text-center p-6 rounded-2xl border border-border bg-background hover:border-accent/30 hover:shadow-lg transition-all duration-300">
-      <div className="relative w-28 h-28 mx-auto mb-5 rounded-xl overflow-hidden bg-muted/50">
+    <article className="group text-center p-6 rounded-xl border border-border bg-surface hover:border-primary/50 hover:shadow-lg transition-all duration-200">
+      <div className="relative w-24 h-24 mx-auto mb-4 rounded-xl overflow-hidden bg-surface-dim">
         {member.image && (
           <img
             src={member.image}
@@ -38,17 +38,14 @@ export function TeamCard({ member }: TeamCardProps) {
         )}
       </div>
 
-      <h3 className="font-heading font-semibold text-lg text-foreground mb-1">
+      <h3 className="font-heading text-headline-sm text-foreground mb-1">
         {member.name}
       </h3>
 
-      <p className="text-label text-accent mb-3">{member.role}</p>
+      <p className="font-sans text-sm text-primary font-medium mb-3">{member.role}</p>
+      <p className="font-sans text-xs text-muted uppercase tracking-wider">{member.group.replace('-', ' ')}</p>
 
-      {member.bio && (
-        <p className="text-sm text-muted mb-4 leading-relaxed">{member.bio}</p>
-      )}
-
-      <div className="flex items-center justify-center gap-3">
+      <div className="flex items-center justify-center gap-2 mt-4">
         {socials.map(({ key, url }) => {
           const Icon = socialIcons[key as keyof typeof socialIcons]
           const isExternal = url.startsWith('http')
@@ -58,7 +55,7 @@ export function TeamCard({ member }: TeamCardProps) {
               href={url}
               target={isExternal ? '_blank' : undefined}
               rel={isExternal ? 'noopener noreferrer' : undefined}
-              className="w-9 h-9 rounded-lg border border-border bg-background/50 flex items-center justify-center text-muted hover:text-highlight hover:border-highlight/50 hover:bg-highlight/10 transition-all duration-200"
+              className="w-8 h-8 rounded-lg border border-border bg-surface-dim flex items-center justify-center text-muted hover:text-primary hover:border-primary/50 hover:bg-primary/10 transition-all duration-200"
               aria-label={key.charAt(0).toUpperCase() + key.slice(1)}
             >
               <Icon className="w-4 h-4" aria-hidden="true" />

@@ -1,55 +1,70 @@
+'use client'
+
 import { SectionHeader } from '@/components/SectionHeader'
 import { ProjectCard } from '@/components/ProjectCard'
 import { projects, getProjectsByCategory } from '@/data/projects'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Projects',
-  description: 'Explore projects built by Code Club SMVDU members — hackathon winners, open source contributions, web apps, and more.',
-}
+import { useState } from 'react'
 
 const categories = ['All', 'Hackathon', 'Open Source', 'Web', 'AI/ML', 'Systems', 'Other'] as const
 
 export default function ProjectsPage() {
+  const [activeCategory, setActiveCategory] = useState('All')
+
+  const filteredProjects = activeCategory === 'All'
+    ? projects
+    : projects.filter(p => p.category === activeCategory.toLowerCase())
+
   return (
     <div className="py-section">
       <div className="max-w-7xl mx-auto px-container">
-        <header className="text-center max-w-3xl mx-auto mb-16">
-          <SectionHeader
-            label="Student Work"
-            title="PROJECTS"
-            description="Ideas into working solutions. Explore projects built through club activities, hackathons, and collaborative development."
-          />
-        </header>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-section pb-16">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface border border-border rounded-full mb-6">
+              <span className="material-symbols-outlined text-primary">code</span>
+              <span className="font-sans text-xs uppercase tracking-wider text-muted">Engineering Showcase</span>
+            </div>
+            <SectionHeader
+              label=""
+              title="PROJECTS SHOWCASE"
+              description="Explore innovative student-built tools, web applications, and systems."
+            />
+          </div>
+        </section>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-12" role="group" aria-label="Filter projects by category">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                cat === 'All'
-                  ? 'bg-highlight text-white shadow-sm'
-                  : 'bg-background border border-border text-muted hover:text-foreground hover:border-accent/50'
-              }`}
-              aria-pressed={cat === 'All'}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="sticky top-16 z-40 bg-background/90 backdrop-blur-md border-b border-border py-3">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 overflow-x-auto">
+            <div className="flex items-center gap-2 min-w-max">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`filter-btn px-4 py-1.5 rounded-lg font-sans text-sm font-medium transition-all ${
+                    activeCategory === cat
+                      ? 'bg-primary text-white shadow-sm'
+                      : 'bg-surface hover:bg-surface-dim text-muted hover:text-foreground border border-border'
+                  }`}
+                  aria-pressed={activeCategory === cat}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <section className="max-w-7xl mx-auto px-6 md:px-12 pt-section">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+        </section>
 
-        <div className="text-center mt-12">
-          <p className="text-muted">
-            More projects coming soon.{' '}
-            <a href="#" className="text-accent hover:underline">View on GitHub →</a>
-          </p>
-        </div>
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-12 text-muted">
+            No projects found for this category.
+          </div>
+        )}
       </div>
     </div>
   )

@@ -11,17 +11,16 @@ interface CTAProps {
 }
 
 export function CTA({
-  title = 'THINK. CODE. SOLVE. GROW.',
-  description = 'Ready to build better problem-solving skills?',
-  buttonText = 'JOIN THE CLUB →',
+  title = 'Ready to grow?',
+  description = 'Join Code Club SMVDU and start your journey towards algorithmic excellence.',
+  buttonText = 'Join the Club',
   buttonHref = '/join',
   variant = 'primary'
 }: CTAProps) {
   return (
-    <section className="relative py-section lg:py-24" aria-labelledby="cta-title">
-      <div className="absolute inset-0 bg-highlight/5 rounded-3xl" aria-hidden="true" />
+    <section className="relative py-section" aria-labelledby="cta-title">
       <div className="relative max-w-3xl mx-auto px-container text-center">
-        <h2 id="cta-title" className="text-section-title text-foreground mb-4">
+        <h2 id="cta-title" className="text-section-title text-foreground mb-4 font-heading font-bold tracking-tight">
           {title}
         </h2>
         <p className="text-lg lg:text-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed">

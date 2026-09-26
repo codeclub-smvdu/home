@@ -1,62 +1,61 @@
 'use client'
 
-import { ArrowRight, Code, Zap, Terminal, Github } from 'lucide-react'
+import { ArrowRight, Code, Terminal } from 'lucide-react'
 import { Button } from './Button'
 import Link from 'next/link'
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden" aria-labelledby="hero-title">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" aria-hidden="true" />
-      
-      <div className="relative max-w-7xl mx-auto px-container py-20 lg:py-32 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-highlight/10 text-highlight text-sm font-medium mb-8" role="status">
-          <span className="w-2 h-2 rounded-full bg-highlight animate-pulse" aria-hidden="true" />
-          <span>Active Community Since 2022</span>
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e3dc_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" aria-hidden="true" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+
+      <div className="relative max-w-4xl mx-auto px-container w-full text-center flex flex-col items-center">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border shadow-xs mb-8 text-xs font-medium text-muted">
+          <span className="w-2 h-2 rounded-full bg-highlight"></span>
+          <span className="font-mono font-semibold text-foreground">SMVDU</span>
+          <span className="text-muted/60">•</span>
+          <span>Official Student Developer Community</span>
         </div>
 
-        <h1 id="hero-title" className="text-hero text-foreground mb-6 leading-tight">
-          CODE CLUB
+        <h1 id="hero-title" className="text-hero text-foreground mb-6 leading-[1.08]">
+          Think. Code. <br className="hidden sm:inline" />
+          <span className="text-primary">Solve.</span> <span className="text-foreground">Grow.</span>
         </h1>
 
-        <p className="text-2xl lg:text-3xl text-muted mb-8 max-w-3xl mx-auto leading-relaxed font-medium">
-          Think. Code. Solve. Grow.
+        <p className="text-base sm:text-lg md:text-xl text-muted max-w-2xl leading-relaxed mb-10 font-normal">
+          The premier collegiate engineering society at Shri Mata Vaishno Devi University. We build problem-solvers through daily algorithmic practice, open source contributions, and hands-on systems hacking.
         </p>
 
-        <p className="text-lg lg:text-xl text-muted mb-12 max-w-2xl mx-auto leading-relaxed">
-          A student-driven technical community focused on problem-solving, coding, technical learning, and continuous practice.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-14">
           <Button size="lg" asChild>
-            <Link href="/join">Join the Club <ArrowRight className="w-5 h-5" aria-hidden="true" /></Link>
+            <Link href="/join">
+              <span>Join the Club</span>
+              <ArrowRight className="w-5 h-5" aria-hidden="true" />
+            </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link href="/events">Explore Events</Link>
+            <Link href="/projects">
+              <span className="material-symbols-outlined text-lg leading-none text-muted">code</span>
+              <span>Explore Projects</span>
+            </Link>
           </Button>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-muted">
-          <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background/50">
-            <Code className="w-4 h-4 text-accent" aria-hidden="true" /> DSA
-          </span>
-          <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background/50">
-            <Terminal className="w-4 h-4 text-accent" aria-hidden="true" /> Coding
-          </span>
-          <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background/50">
-            <Zap className="w-4 h-4 text-accent" aria-hidden="true" /> Technology
-          </span>
-          <span className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-background/50">
-            <Github className="w-4 h-4 text-accent" aria-hidden="true" /> Projects
-          </span>
+        <div className="w-full max-w-2xl grid grid-cols-3 divide-x divide-border bg-surface/80 backdrop-blur-xs border border-border rounded-xl py-4 px-2 shadow-xs text-center">
+          <div className="px-3">
+            <div className="font-heading text-xl sm:text-2xl font-bold text-foreground">500+</div>
+            <div className="text-xs sm:text-xs text-muted font-medium mt-0.5">Active Coders</div>
+          </div>
+          <div className="px-3">
+            <div className="font-heading text-xl sm:text-2xl font-bold text-primary">48+</div>
+            <div className="text-xs sm:text-xs text-muted font-medium mt-0.5">Weekly Contests</div>
+          </div>
+          <div className="px-3">
+            <div className="font-heading text-xl sm:text-2xl font-bold text-highlight">14</div>
+            <div className="text-xs sm:text-xs text-muted font-medium mt-0.5">Hackathon Wins</div>
+          </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
-        <svg className="w-6 h-6 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
       </div>
     </section>
   )
