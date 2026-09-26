@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, Code } from 'lucide-react'
+import { Menu, X, Terminal } from 'lucide-react'
 import { Button } from './Button'
 
 const navLinks = [
@@ -23,16 +23,14 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border shadow-sm' : 'bg-transparent'
+    <header className={`sticky top-0 w-full z-50 h-16 transition-all duration-300 ${
+      scrolled ? 'bg-background/95 backdrop-blur-sm border-b border-border shadow-sm' : 'bg-background/80 backdrop-blur-md border-b border-border'
     }`}>
       <nav className="max-w-7xl mx-auto px-container" aria-label="Main navigation">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity" aria-label="Code Club Home">
-            <div className="w-8 h-8 rounded-lg bg-highlight flex items-center justify-center">
-              <Code className="w-5 h-5 text-white" aria-hidden="true" />
-            </div>
-            <span className="font-heading font-bold text-xl tracking-tight">Code Club</span>
+        <div className="flex h-full items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity font-heading font-bold text-xl tracking-tight" aria-label="Code Club Home">
+            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>terminal</span>
+            <span>Code Club SMVDU</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
@@ -40,13 +38,25 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-muted hover:text-foreground transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-highlight after:transition-all hover:after:w-full"
+                className="text-sm font-normal text-muted hover:text-foreground transition-colors font-heading"
               >
                 {link.label}
               </Link>
             ))}
             <Button size="sm" asChild>
               <Link href="/join">Join the Club →</Link>
+            </Button>
+          </div>
+
+          <div className="hidden md:flex items-center gap-2">
+            <Button variant="ghost" size="sm">
+              <Terminal className="w-4 h-4" aria-hidden="true" />
+            </Button>
+            <Button variant="ghost" size="sm">
+              <span className="material-symbols-outlined text-sm">code</span>
+            </Button>
+            <Button size="sm" asChild>
+              <Link href="/join">Join Us</Link>
             </Button>
           </div>
 

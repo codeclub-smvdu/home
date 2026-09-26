@@ -1,87 +1,101 @@
 import Link from 'next/link'
-import { Github, Linkedin, Instagram, Mail, Code } from 'lucide-react'
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/events', label: 'Events' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/team', label: 'Team' },
+  { href: '/join', label: 'Join the Club' },
+]
+
+const footerLinks = [
+  {
+    title: 'Navigation',
+    links: [
+      { href: '/', label: 'Home' },
+      { href: '/events', label: 'Events' },
+      { href: '/projects', label: 'Projects' },
+      { href: '/team', label: 'Team' },
+      { href: '/join', label: 'Join the Club' },
+    ],
+  },
+  {
+    title: 'Ecosystem',
+    links: [
+      { href: 'https://github.com/codeclub-smvdu', label: 'GitHub', external: true },
+      { href: 'https://discord.gg/codeclub-smvdu', label: 'Discord', external: true },
+      { href: '/guidelines', label: 'Guidelines' },
+    ],
+  },
+  {
+    title: 'Administration',
+    links: [
+      { href: '/contact-faculty', label: 'Contact Faculty' },
+    ],
+  },
+]
 
 const socialLinks = [
-  { href: 'https://github.com/codeclub-smvdu', label: 'GitHub', icon: Github },
-  { href: 'https://linkedin.com/company/codeclub-smvdu', label: 'LinkedIn', icon: Linkedin },
-  { href: 'https://instagram.com/codeclub_smvdu', label: 'Instagram', icon: Instagram },
-  { href: 'mailto:codeclub@smvdu.ac.in', label: 'Email', icon: Mail },
+  { href: 'https://github.com/codeclub-smvdu', label: 'GitHub' },
+  { href: 'https://linkedin.com/company/codeclub-smvdu', label: 'LinkedIn' },
+  { href: 'https://instagram.com/codeclub_smvdu', label: 'Instagram' },
+  { href: 'mailto:codeclub@smvdu.ac.in', label: 'Email' },
 ]
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background/50" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-container py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 text-foreground mb-4" aria-label="Code Club Home">
-              <div className="w-8 h-8 rounded-lg bg-highlight flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" aria-hidden="true" />
-              </div>
-              <span className="font-heading font-bold text-xl tracking-tight">Code Club</span>
-            </Link>
-            <p className="text-muted text-base leading-relaxed mb-6 max-w-xs">
-              Think. Code. Solve. Grow.
-            </p>
-            <div className="flex gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target={social.href.startsWith('http') ? '_blank' : undefined}
-                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="text-muted hover:text-highlight transition-colors"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-heading font-semibold text-lg mb-4">Quick Links</h3>
-            <nav aria-label="Footer navigation">
-              <ul className="space-y-3">
-                {[
-                  { href: '/', label: 'Home' },
-                  { href: '/events', label: 'Events' },
-                  { href: '/projects', label: 'Projects' },
-                  { href: '/team', label: 'Team' },
-                  { href: '/join', label: 'Join the Club' },
-                ].map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="text-muted hover:text-foreground transition-colors text-sm">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          <div>
-            <h3 className="font-heading font-semibold text-lg mb-4">Contact</h3>
-            <address className="text-muted text-sm not-italic space-y-3">
-              <p>Code Club, SMVDU</p>
-              <p>Shri Mata Vaishno Devi University</p>
-              <p>Katra, Reasi - 182320</p>
-              <p>Jammu & Kashmir, India</p>
-              <a href="mailto:codeclub@smvdu.ac.in" className="hover:text-highlight transition-colors">
-                codeclub@smvdu.ac.in
+    <footer className="border-t border-border bg-surface py-16" role="contentinfo">
+      <div className="max-w-7xl mx-auto px-container grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="space-y-4">
+          <Link href="/" className="flex items-center gap-2 text-foreground font-heading font-bold text-lg tracking-tight" aria-label="Code Club Home">
+            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>terminal</span>
+            <span>Code Club SMVDU</span>
+          </Link>
+          <p className="text-muted text-sm leading-relaxed">
+            Think. Code. Solve. Grow. The official technical society fostering algorithmic excellence and open source innovation at SMVDU.
+          </p>
+          <div className="flex gap-4">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target={social.href.startsWith('http') ? '_blank' : undefined}
+                rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="text-muted hover:text-primary transition-colors"
+                aria-label={social.label}
+              >
+                <span className="material-symbols-outlined text-base">{social.label.toLowerCase() === 'github' ? 'code' : social.label.toLowerCase() === 'linkedin' ? 'business' : social.label.toLowerCase() === 'instagram' ? 'camera_alt' : 'mail'}</span>
               </a>
-            </address>
+            ))}
           </div>
         </div>
 
-        <div className="mt-10 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted">
-            © {new Date().getFullYear()} Code Club, SMVDU. All rights reserved.
-          </p>
-          <p className="text-sm text-muted">
-            Built by students, for students.
-          </p>
-        </div>
+        {footerLinks.map((section) => (
+          <div key={section.title} className="space-y-3">
+            <h4 className="font-heading font-semibold text-xs uppercase tracking-wider text-foreground">{section.title}</h4>
+            <ul className="space-y-2">
+              {section.links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    className="text-muted hover:text-primary transition-colors text-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+      </div>
+
+      <div className="max-w-7xl mx-auto px-container mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-sm text-muted">
+          © {new Date().getFullYear()} Code Club SMVDU. Think. Code. Solve. Grow. All rights reserved.
+        </p>
       </div>
     </footer>
   )

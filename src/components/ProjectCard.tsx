@@ -1,90 +1,79 @@
 import Link from 'next/link'
-import { ArrowRight, Github, ExternalLink } from 'lucide-react'
+import { ArrowRight, Github, Terminal } from 'lucide-react'
 import { Project } from '@/data/projects'
 
 interface ProjectCardProps {
   project: Project
 }
 
+const categoryColors: Record<string, string> = {
+  'hackathon': 'bg-primary/10 text-primary border-primary/20',
+  'open-source': 'bg-emerald-100 text-emerald-800 border-emerald-200',
+  'web': 'bg-primary/10 text-primary border-primary/20',
+  'ai-ml': 'bg-violet-100 text-violet-800 border-violet-200',
+  'systems': 'bg-amber-100 text-amber-800 border-amber-200',
+  'other': 'bg-muted/10 text-muted border-muted/20',
+}
+
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="group rounded-2xl border border-border bg-background overflow-hidden hover:border-accent/30 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
-      <div className="aspect-video relative bg-muted/50 overflow-hidden">
-        {project.image && (
-          <img
-            src={project.image}
-            alt=""
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 flex gap-2">
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-white text-foreground px-4 py-2 rounded-lg text-sm font-medium text-center hover:bg-muted/10 transition-colors flex items-center justify-center gap-2"
-          >
-            View Project
-            <ExternalLink className="w-4 h-4" aria-hidden="true" />
-          </Link>
+    <article className="group relative bg-surface border border-border rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:border-primary/50 hover:shadow-lg" data-category={project.category}>
+      <div>
+        <div className="relative h-64 w-full overflow-hidden bg-surface-dim">
+          {project.image && (
+            <img
+              src={project.image}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+          )}
+          <div className="absolute top-4 left-4">
+            <span className={`px-3 py-1 bg-surface/90 backdrop-blur-sm border border-border/40 rounded-full font-sans text-sm text-primary font-semibold`}>
+              {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
+            </span>
+          </div>
+        </div>
+        <div className="p-6">
+          <h3 className="font-heading text-headline-md text-foreground mb-2 group-hover:text-primary transition-colors">
+            {project.title}
+          </h3>
+          <p className="font-sans text-body-md text-muted mb-4">{project.description}</p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.techStack.map((tech) => (
+              <span key={tech} className="px-2.5 py-1 bg-surface-dim border border-border/30 rounded font-sans text-xs text-muted">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="px-6 pb-6 pt-0 flex items-center justify-between border-t border-border/20 pt-4 mt-auto">
+        <span className="font-sans text-xs text-muted">Maintained by Code Club Core</span>
+        <div className="flex items-center gap-2">
           {project.github && (
             <Link
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white/90 bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
+              className="p-2 bg-surface-dim hover:bg-surface hover:border-border transition-colors flex items-center gap-1"
               aria-label="View on GitHub"
             >
               <Github className="w-4 h-4" aria-hidden="true" />
+              <span className="font-sans text-sm">GitHub</span>
             </Link>
           )}
+          <Link
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-primary text-white hover:bg-primary-dark rounded-lg transition-colors flex items-center gap-1"
+            aria-label="Live Demo"
+          >
+            <Terminal className="w-4 h-4" aria-hidden="true" />
+            <span className="font-sans text-sm">Live Demo</span>
+          </Link>
         </div>
-      </div>
-
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-label text-accent bg-accent/10 px-2 py-0.5 rounded">
-            {project.category}
-          </span>
-          <span className="text-label text-muted">{project.year}</span>
-        </div>
-
-        <h3 className="font-heading font-semibold text-xl text-foreground mb-3 group-hover:text-highlight transition-colors">
-          {project.title}
-        </h3>
-
-        <p className="text-muted leading-relaxed mb-4 flex-1">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.techStack.slice(0, 4).map((tech) => (
-            <span key={tech} className="text-xs px-2.5 py-1 rounded border border-border text-muted bg-background/50">
-              {tech}
-            </span>
-          ))}
-          {project.techStack.length > 4 && (
-            <span className="text-xs px-2.5 py-1 rounded border border-border text-muted bg-background/50">
-              +{project.techStack.length - 4} more
-            </span>
-          )}
-        </div>
-
-        <div className="text-sm text-muted mb-4">
-          <span className="font-medium">Team:</span> {' '}
-          {project.team.slice(0, 3).join(', ')}
-          {project.team.length > 3 && ` +${project.team.length - 3} more`}
-        </div>
-
-        <Link
-          href={project.github || project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-accent font-medium hover:text-accent-dark transition-colors mt-auto"
-        >
-          View Code
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-        </Link>
       </div>
     </article>
   )
